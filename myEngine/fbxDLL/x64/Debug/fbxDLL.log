@@ -1,0 +1,12 @@
+﻿  fbxDLL.cpp
+c:\users\corvo\documents\visual studio 2015\projects\engine dev\collision\fbxdll\simplemesh.h(5): warning C4081: expected '('; found 'newline'
+c:\users\corvo\documents\visual studio 2015\projects\engine dev\collision\fbxdll\simplemesh.h(20): warning C4068: unknown pragma
+c:\users\corvo\documents\visual studio 2015\projects\engine dev\collision\fbxdll\fbxdll.cpp(185): warning C4101: 'fileText': unreferenced local variable
+c:\users\corvo\documents\visual studio 2015\projects\engine dev\collision\fbxdll\fbxdll.cpp(207): warning C4018: '<': signed/unsigned mismatch
+c:\users\corvo\documents\visual studio 2015\projects\engine dev\collision\fbxdll\fbxdll.cpp(210): warning C4244: '=': conversion from 'fbxsdk::FbxDouble' to 'float', possible loss of data
+c:\users\corvo\documents\visual studio 2015\projects\engine dev\collision\fbxdll\fbxdll.cpp(211): warning C4244: '=': conversion from 'fbxsdk::FbxDouble' to 'float', possible loss of data
+c:\users\corvo\documents\visual studio 2015\projects\engine dev\collision\fbxdll\fbxdll.cpp(212): warning C4244: '=': conversion from 'fbxsdk::FbxDouble' to 'float', possible loss of data
+c:\users\corvo\documents\visual studio 2015\projects\engine dev\collision\fbxdll\fbxdll.cpp(248): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\users\corvo\documents\visual studio 2015\projects\engine dev\collision\fbxdll\fbxdll.cpp(250): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  fbxDLL.vcxproj -> C:\Users\CORVO\Documents\Visual Studio 2015\Projects\ENGINE DEV\COLLISION\x64\Debug\fbxDLL.dll
+  fbxDLL.vcxproj -> C:\Users\CORVO\Documents\Visual Studio 2015\Projects\ENGINE DEV\COLLISION\x64\Debug\fbxDLL.pdb (Full PDB)

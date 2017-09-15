@@ -1,0 +1,34 @@
+﻿  DAY1.cpp
+c:\users\corvo\documents\visual studio 2015\projects\engine dev\collision\fbxdll\simplemesh.h(5): warning C4081: expected '('; found 'newline'
+c:\users\corvo\documents\visual studio 2015\projects\engine dev\collision\fbxdll\simplemesh.h(20): warning C4068: unknown pragma
+c:\users\corvo\documents\visual studio 2015\projects\engine dev\collision\day1.cpp(178): warning C4305: '+=': truncation from 'double' to 'float'
+c:\users\corvo\documents\visual studio 2015\projects\engine dev\collision\day1.cpp(199): warning C4305: '+=': truncation from 'double' to 'float'
+c:\users\corvo\documents\visual studio 2015\projects\engine dev\collision\day1.cpp(284): warning C4305: '=': truncation from 'double' to 'float'
+c:\users\corvo\documents\visual studio 2015\projects\engine dev\collision\day1.cpp(286): warning C4305: '=': truncation from 'double' to 'float'
+c:\users\corvo\documents\visual studio 2015\projects\engine dev\collision\day1.cpp(541): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\corvo\documents\visual studio 2015\projects\engine dev\collision\day1.cpp(542): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\corvo\documents\visual studio 2015\projects\engine dev\collision\day1.cpp(543): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\corvo\documents\visual studio 2015\projects\engine dev\collision\day1.cpp(501): warning C4101: 'cubeFaceTriangles2': unreferenced local variable
+c:\users\corvo\documents\visual studio 2015\projects\engine dev\collision\day1.cpp(751): warning C4101: 'temp': unreferenced local variable
+c:\users\corvo\documents\visual studio 2015\projects\engine dev\collision\day1.cpp(752): warning C4101: 'getDot': unreferenced local variable
+c:\users\corvo\documents\visual studio 2015\projects\engine dev\collision\day1.cpp(909): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
+c:\users\corvo\documents\visual studio 2015\projects\engine dev\collision\day1.cpp(909): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\corvo\documents\visual studio 2015\projects\engine dev\collision\day1.cpp(910): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
+c:\users\corvo\documents\visual studio 2015\projects\engine dev\collision\day1.cpp(910): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\corvo\documents\visual studio 2015\projects\engine dev\collision\day1.cpp(916): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
+c:\users\corvo\documents\visual studio 2015\projects\engine dev\collision\day1.cpp(916): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\corvo\documents\visual studio 2015\projects\engine dev\collision\day1.cpp(917): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
+c:\users\corvo\documents\visual studio 2015\projects\engine dev\collision\day1.cpp(917): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\corvo\documents\visual studio 2015\projects\engine dev\collision\day1.cpp(993): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\corvo\documents\visual studio 2015\projects\engine dev\collision\day1.cpp(1089): warning C4267: '=': conversion from 'size_t' to 'UINT', possible loss of data
+c:\users\corvo\documents\visual studio 2015\projects\engine dev\collision\day1.cpp(1103): warning C4267: 'argument': conversion from 'size_t' to 'UINT', possible loss of data
+c:\users\corvo\documents\visual studio 2015\projects\engine dev\collision\day1.cpp(1106): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\users\corvo\documents\visual studio 2015\projects\engine dev\collision\day1.cpp(1107): warning C4267: 'argument': conversion from 'size_t' to 'UINT', possible loss of data
+c:\users\corvo\documents\visual studio 2015\projects\engine dev\collision\day1.cpp(1194): warning C4305: 'argument': truncation from 'int' to 'bool'
+LINK : warning LNK4075: ignoring '/INCREMENTAL' due to '/FORCE' specification
+BVH.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/OPT:LBR' specification
+DAY1.obj : warning LNK4006: "class pipeline_state_t default_pipeline" (?default_pipeline@@3Vpipeline_state_t@@A) already defined in BVH.obj; second definition ignored
+DebugRenderer.obj : warning LNK4006: "class pipeline_state_t default_pipeline" (?default_pipeline@@3Vpipeline_state_t@@A) already defined in BVH.obj; second definition ignored
+C:\Users\CORVO\Documents\Visual Studio 2015\Projects\ENGINE DEV\COLLISION\x64\Debug\DAY1.exe : warning LNK4088: image being generated due to /FORCE option; image may not run
+  DAY1.vcxproj -> C:\Users\CORVO\Documents\Visual Studio 2015\Projects\ENGINE DEV\COLLISION\x64\Debug\DAY1.exe
+  DAY1.vcxproj -> C:\Users\CORVO\Documents\Visual Studio 2015\Projects\ENGINE DEV\COLLISION\x64\Debug\DAY1.pdb (Full PDB)
