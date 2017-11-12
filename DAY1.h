@@ -15,7 +15,7 @@ struct SEND_TO_VRAM
 struct SIMPLE_VERTEX
 {
 	//properly align these as in the simple_vert
-	unsigned int index;
+	//unsigned int index;
 	XMFLOAT3 pos;
 	XMFLOAT3 color;
 	XMFLOAT2 uvs;

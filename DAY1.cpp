@@ -21,7 +21,7 @@
 #include "PixelShader.csh"
 #include "magePixelShader.csh"
 #include "VertexShader.csh"
-#include "basicCube.h"
+//#include "basicCube.h"
 #include <stdlib.h>  
 #include <crtdbg.h>  
 #define _CRTDBG_MAP_ALLOC  
@@ -101,12 +101,10 @@ float zFar = 10.0f;
 
 
 
-//void TurnToalg();
-XMFLOAT4X4 turnToFunction(XMFLOAT4X4 viewerMatrix, XMVECTOR targetPos, XMFLOAT4X4 cube, float speed);
-XMFLOAT4X4 lookAtFunction(XMVECTOR eye, XMVECTOR at, XMVECTOR up, XMFLOAT4X4 cube);
+
 ATOM                MyRegisterClass(HINSTANCE hInstance);
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
-void calculateAABB(vector<SIMPLE_VERTEX> triangleInds);
+
 INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
 void UpdateMouse(float deltaTime, float x, float y);
 BOOL                InitInstance(HINSTANCE, int);
@@ -481,7 +479,7 @@ void initBuffer()
 	default_pipeline.m_pDevice->CreateBuffer(default_pipeline.drawnBuffDesc, &srd, &default_pipeline.vertexBuffer);
 	default_pipeline.m_pDevice->CreateVertexShader(VertexShader, sizeof(VertexShader), nullptr, &default_pipeline.vertex_shader);
 	default_pipeline.m_pDevice->CreatePixelShader(PixelShader, sizeof(PixelShader), nullptr, &default_pipeline.pixel_shader);
-	//default_pipeline.m_pDevice->CreatePixelShader(magePixelShader, sizeof(magePixelShader), nullptr, &default_pipeline.magePixelShader);
+	default_pipeline.m_pDevice->CreatePixelShader(magePixelShader, sizeof(magePixelShader), nullptr, &default_pipeline.magePixelShader);
 
 }
 

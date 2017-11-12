@@ -10,8 +10,11 @@
 //shape
 //
 
+XMFLOAT3* cubeColor = new XMFLOAT3;
+float* cubeSizeMultiplier = new float;
+XMFLOAT4* cubePosition = new XMFLOAT4;
 //multiply each vert pos in the cube by the sizeOfCube factor
-basicCube::basicCube(XMFLOAT4 color, float sizeOfCube, XMFLOAT4 position)
+basicCube::basicCube(XMFLOAT3* color, float *sizeOfCube, XMFLOAT4* position)
 {
 	cubeDevice = default_pipeline.m_pDevice;
 	cubeDeviceContext = default_pipeline.context;
@@ -25,25 +28,29 @@ basicCube::basicCube(XMFLOAT4 color, float sizeOfCube, XMFLOAT4 position)
 	cubeIndices[5] = 5;
 	cubeIndices[6] = 6;
 	cubeIndices[7] = 7;
+	cubeColor = color;
+	cubeSizeMultiplier = sizeOfCube;
+	cubePosition = position;
 }
 
-void basicCube::initDevice(ID3D11Device* cubeDevice)
-{
-
-}
 
 
-D3D11_SUBRESOURCE_DATA setupTriangles( )
+
+D3D11_SUBRESOURCE_DATA setupTriangles(XMFLOAT3& color = *cubeColor, float& size = *cubeSizeMultiplier, XMFLOAT4& position = *cubePosition)
 {
 	SIMPLE_VERTEX cubeVerts[8];
+
+	XMFLOAT3 middleOfCube = { 0,0,0 };
 
 	triangle cubeFaceTriangles[12];
 	D3D11_SUBRESOURCE_DATA* totalTrianglesSrd;
 	ZeroMemory(&totalTrianglesSrd, sizeof(totalTrianglesSrd));
 
+
+	//this SHOULD set each vert to an index, so on overlap they will still go to their correct index
 	for (unsigned int i = 0; i < 8; i++)
 	{
-		cubeVerts[i].index = i;
+	//	cubeVerts[i].index = i;
 	}
 
 	{
@@ -79,6 +86,22 @@ D3D11_SUBRESOURCE_DATA setupTriangles( )
 		cubeVerts[7].pos.x = 0.25f;
 		cubeVerts[7].pos.y = 0.25f;		//TOP RIGHT FRONT 8
 		cubeVerts[7].pos.z = -0.25f;
+	}
+
+	for (unsigned int j = 0; j < 8; j++)
+	{
+		cubeVerts[j].pos.x += position.x;
+		cubeVerts[j].pos.y += position.y;
+		cubeVerts[j].pos.z += position.z;
+
+		if (size <= 0)
+			break;
+		else
+		{
+			cubeVerts[j].pos.x *= size;
+			cubeVerts[j].pos.y *= size;
+			cubeVerts[j].pos.z *= size;
+		}
 	}
 
 	{
@@ -219,7 +242,16 @@ D3D11_SUBRESOURCE_DATA setupTriangles( )
 		}
 
 	}
-
+	if (&color != nullptr)
+	{
+		for (unsigned int i = 0; i < 12; i++)
+		{
+			for (unsigned int j = 0; j < 3; j++)
+			{
+				cubeFaceTriangles[i].point[j].color = color;
+			}
+		}
+	}
 	totalTrianglesSrd->pSysMem = cubeFaceTriangles;
 
 	return	*totalTrianglesSrd;
@@ -229,30 +261,34 @@ D3D11_SUBRESOURCE_DATA setupTriangles( )
 
 void basicCube::createBuffers()
 {
-	
-	D3D11_BUFFER_DESC cubeVertexBufferDesc;
-	cubeVertexBufferDesc.Usage = D3D11_USAGE_DYNAMIC;
-	cubeVertexBufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
-	cubeVertexBufferDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
-	cubeVertexBufferDesc.ByteWidth = sizeof(triangle) * 12;
-	cubeVertexBufferDesc.MiscFlags = 0;
 
-	cubeDevice->CreateBuffer(&cubeVertexBufferDesc, &setupTriangles(), &cubeVertexBuffer);
+	D3D11_BUFFER_DESC* cubeVertexBufferDesc = { 0 };
+	cubeVertexBufferDesc->Usage = D3D11_USAGE_DYNAMIC;
+	cubeVertexBufferDesc->BindFlags = D3D11_BIND_VERTEX_BUFFER;
+	cubeVertexBufferDesc->CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+	cubeVertexBufferDesc->ByteWidth = sizeof(triangle) * 12;
+	cubeVertexBufferDesc->MiscFlags = 0;
 
-	D3D11_BUFFER_DESC cubeIndexBufferDesc;
-	cubeIndexBufferDesc.Usage = D3D11_USAGE_DYNAMIC;
-	cubeIndexBufferDesc.BindFlags = D3D11_BIND_INDEX_BUFFER;
-	cubeIndexBufferDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
-	cubeIndexBufferDesc.ByteWidth = sizeof(cubeIndices) / sizeof(cubeIndices[0]);
-	cubeIndexBufferDesc.MiscFlags = 0;
+	cubeDevice->CreateBuffer(cubeVertexBufferDesc, &setupTriangles(), &cubeVertexBuffer);
+
+	D3D11_BUFFER_DESC* cubeIndexBufferDesc = { 0 };
+	cubeIndexBufferDesc->Usage = D3D11_USAGE_DYNAMIC;
+	cubeIndexBufferDesc->BindFlags = D3D11_BIND_INDEX_BUFFER;
+	cubeIndexBufferDesc->CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+	//IN THE EVENT OF THINGS GOING WRONG, LOOK AT THIS BYTEWIDTH, MY MATH COULD BE OFF OR TOTALLY WRONG
+	cubeIndexBufferDesc->ByteWidth = sizeof(cubeIndices) / sizeof(cubeIndices[0]);
+	cubeIndexBufferDesc->MiscFlags = 0;
+
 	D3D11_SUBRESOURCE_DATA cubeIndexBufferSRD = { 0 };
 	cubeIndexBufferSRD.pSysMem = cubeIndices;
-	//CUBEINDICES MIGHT NOT WORK, SHOULD BE THE SRD OF THE CUBEVERTS INDICES
-	cubeDevice->CreateBuffer(&cubeIndexBufferDesc, &cubeIndexBufferSRD, &cubeIndexBuffer);
+
+	cubeDevice->CreateBuffer(cubeIndexBufferDesc, &cubeIndexBufferSRD, &cubeIndexBuffer);
 	//still need an index buffer dont forget
+	//WRITE NOTES TO YOURSELF IT WORKS LOOK AT THIS GUY REMINDING ME TO DO STUFF THANKS ME YOU ROCK
 }
 
 
 basicCube::~basicCube()
 {
+
 }
