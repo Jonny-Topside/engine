@@ -20,14 +20,6 @@ basicCube::basicCube(XMFLOAT3* color, float *sizeOfCube, XMFLOAT4* position)
 	cubeDeviceContext = default_pipeline.context;
 	cubeResource = default_pipeline.resource;
 	cubeSwapChain = default_pipeline.m_pSwapChain;
-	cubeIndices[0] = 0;
-	cubeIndices[1] = 1;
-	cubeIndices[2] = 2;
-	cubeIndices[3] = 3;
-	cubeIndices[4] = 4;
-	cubeIndices[5] = 5;
-	cubeIndices[6] = 6;
-	cubeIndices[7] = 7;
 	cubeColor = color;
 	cubeSizeMultiplier = sizeOfCube;
 	cubePosition = position;

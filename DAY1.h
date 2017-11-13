@@ -12,9 +12,10 @@ struct SEND_TO_VRAM
 	XMFLOAT4X4 view;
 	XMFLOAT4X4 projection;
 };
+
 struct SIMPLE_VERTEX
 {
-	//properly align these as in the simple_vert
+	//whenver I change this structure, it affects the cube being drawn, I will have to change the input layout in conjunciton as well
 	//unsigned int index;
 	XMFLOAT3 pos;
 	XMFLOAT3 color;
