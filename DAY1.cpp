@@ -21,7 +21,7 @@
 #include "PixelShader.csh"
 #include "magePixelShader.csh"
 #include "VertexShader.csh"
-//#include "basicCube.h"
+#include "basicCube.h"
 #include <stdlib.h>  
 #include <crtdbg.h>  
 #define _CRTDBG_MAP_ALLOC  
@@ -765,7 +765,13 @@ void drawCurrFrame()
  	//	default_pipeline.context->Map(default_pipeline.constBuffer, NULL, D3D11_MAP_WRITE_DISCARD, NULL, &MappedSubresource);
  	//	memcpy(MappedSubresource.pData, &toShader, sizeof(SEND_TO_VRAM));
  	//	default_pipeline.context->Unmap(default_pipeline.constBuffer, NULL);
- 
+
+	XMFLOAT3 passInColor = { 0.0f,0.0f,0.0f };
+	float passInSize = 1.0f;
+	XMFLOAT4 passInPosition = { 2.0f, 1.0f, 1.0f, 1.0f };
+	
+	basicCube* testCube = new basicCube(&passInColor, &passInSize, &passInPosition);
+
 
 	default_pipeline.m_pSwapChain->Present(1, 0);
 }

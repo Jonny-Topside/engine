@@ -12,23 +12,38 @@
 
 XMFLOAT3* cubeColor = new XMFLOAT3;
 float* cubeSizeMultiplier = new float;
-XMFLOAT4* cubePosition = new XMFLOAT4;
+//XMFLOAT4* cubePosition = new XMFLOAT4;
+SEND_TO_VRAM* cubeWorldData = nullptr;
+
 //multiply each vert pos in the cube by the sizeOfCube factor
 basicCube::basicCube(XMFLOAT3* color, float *sizeOfCube, XMFLOAT4* position)
 {
+	
+
+	//setting cubes constant buffer to the default pipelines, will have to change the model matrix later, for now the other two will be the same
+	cubeConstantBuffer = default_pipeline.constBuffer;
+	//this is dangerously most probably the incorrect way of doing this
+	cubeWorldData = (SEND_TO_VRAM*)cubeConstantBuffer;
+	XMStoreFloat4x4(&cubeWorldData->model, XMMatrixIdentity());
 	cubeDevice = default_pipeline.m_pDevice;
 	cubeDeviceContext = default_pipeline.context;
 	cubeResource = default_pipeline.resource;
 	cubeSwapChain = default_pipeline.m_pSwapChain;
 	cubeColor = color;
 	cubeSizeMultiplier = sizeOfCube;
-	cubePosition = position;
+	//make sure to triple check this, I may need to revert to the other way, which was passing in a pointer to the triangles function and adding the position to each vert individually
+	cubeWorldData->model._14 = position->x;
+	cubeWorldData->model._24 = position->y;
+	cubeWorldData->model._34 = position->z;
+	cubeWorldData->model._44 = 1.0f;
+
+	//cubePosition = position;
 }
 
 
 
 
-D3D11_SUBRESOURCE_DATA setupTriangles(XMFLOAT3& color = *cubeColor, float& size = *cubeSizeMultiplier, XMFLOAT4& position = *cubePosition)
+D3D11_SUBRESOURCE_DATA setupTriangles(XMFLOAT3& color = *cubeColor, float& size = *cubeSizeMultiplier)
 {
 	SIMPLE_VERTEX cubeVerts[8];
 
@@ -82,9 +97,9 @@ D3D11_SUBRESOURCE_DATA setupTriangles(XMFLOAT3& color = *cubeColor, float& size 
 
 	for (unsigned int j = 0; j < 8; j++)
 	{
-		cubeVerts[j].pos.x += position.x;
-		cubeVerts[j].pos.y += position.y;
-		cubeVerts[j].pos.z += position.z;
+		cubeVerts[j].pos.x  ;
+		cubeVerts[j].pos.y  ;
+		cubeVerts[j].pos.z  ;
 
 		if (size <= 0)
 			break;
@@ -253,7 +268,7 @@ D3D11_SUBRESOURCE_DATA setupTriangles(XMFLOAT3& color = *cubeColor, float& size 
 
 void basicCube::createBuffers()
 {
-
+	unsigned int stride = sizeof(SIMPLE_VERTEX);
 	D3D11_BUFFER_DESC* cubeVertexBufferDesc = { 0 };
 	cubeVertexBufferDesc->Usage = D3D11_USAGE_DYNAMIC;
 	cubeVertexBufferDesc->BindFlags = D3D11_BIND_VERTEX_BUFFER;
@@ -262,6 +277,7 @@ void basicCube::createBuffers()
 	cubeVertexBufferDesc->MiscFlags = 0;
 
 	cubeDevice->CreateBuffer(cubeVertexBufferDesc, &setupTriangles(), &cubeVertexBuffer);
+	cubeDeviceContext->IASetVertexBuffers(0, 1, &cubeVertexBuffer, &stride, 0);
 
 	D3D11_BUFFER_DESC* cubeIndexBufferDesc = { 0 };
 	cubeIndexBufferDesc->Usage = D3D11_USAGE_DYNAMIC;
@@ -275,12 +291,22 @@ void basicCube::createBuffers()
 	cubeIndexBufferSRD.pSysMem = cubeIndices;
 
 	cubeDevice->CreateBuffer(cubeIndexBufferDesc, &cubeIndexBufferSRD, &cubeIndexBuffer);
+	//cubeDeviceContext->IASetIndexBuffer(cubeIndexBuffer, 1, 0);
+
+	cubeDeviceContext->VSSetConstantBuffers(0, 1, &cubeConstantBuffer);
+
 	//still need an index buffer dont forget
 	//WRITE NOTES TO YOURSELF IT WORKS LOOK AT THIS GUY REMINDING ME TO DO STUFF THANKS ME YOU ROCK
 }
 
+void basicCube::displayCube()
+{
+
+}
 
 basicCube::~basicCube()
 {
-
+	delete cubeColor;
+	delete cubeSizeMultiplier;
+	delete cubeWorldData;
 }
