@@ -34,7 +34,6 @@
 #define GREEN 0x00ff00
 #define YELLOW 0xffff00
 #define BLUE 0x0000ff
-using namespace std;
 using namespace DirectX;
 
 // Global Variables:
@@ -761,7 +760,6 @@ void drawCurrFrame()
 	default_pipeline.context->Draw(36, 0);
 
 
- 
  	//	default_pipeline.context->Map(default_pipeline.constBuffer, NULL, D3D11_MAP_WRITE_DISCARD, NULL, &MappedSubresource);
  	//	memcpy(MappedSubresource.pData, &toShader, sizeof(SEND_TO_VRAM));
  	//	default_pipeline.context->Unmap(default_pipeline.constBuffer, NULL);
@@ -770,7 +768,8 @@ void drawCurrFrame()
 	float passInSize = 1.0f;
 	XMFLOAT4 passInPosition = { 2.0f, 1.0f, 1.0f, 1.0f };
 	
-	basicCube* testCube = new basicCube(&passInColor, &passInSize, &passInPosition);
+	//uncommenting this line currently breaks things
+	//basicCube* testCube = new basicCube(&passInColor, &passInSize, &passInPosition);
 
 
 	default_pipeline.m_pSwapChain->Present(1, 0);
