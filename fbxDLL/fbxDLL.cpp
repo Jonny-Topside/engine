@@ -2,6 +2,8 @@
 //
 
 #include "stdafx.h"
+//WHEN THE PROJECT THROWS AN ERROR FOR THIS HEADER NOT BEING FOUND PUT IT BACK IN THE RIGHT 
+//FOLDER(IDK WHERE) AND TURN OFF OPTION TO EXCLUDE IT FROM BUILD
 #include <fbxsdk.h>
 #include "fbxDLL.h"
 #include <fstream>
